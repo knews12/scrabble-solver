@@ -262,8 +262,19 @@ class WordFinder:
     def __init__(self, word_tree):
         self.word_tree = word_tree
 
-    def find_words(self, characters):
-        """Takes a character string and permutes it to find all possible words."""
+    def highest_value_word(self, letters):
+        pass
+
+    def possible_words(self, letters):
+        pass
+
+    def number_of_permutations(self, letters):
+        pass
+
+    def __permute(self, so_far, left, permutations):
+        pass
+
+    def __highest_value(self, words):
         pass
 
 
@@ -305,3 +316,103 @@ class CharacterNode:
 
 scrabble = ScrabbleGame()
 scrabble.start()
+
+"""
+public WordFinder(Board board, Hand hand, Dictionary dictionary)
+    {
+        this.board = board;
+        this.hand = hand;
+        this.dictionary = dictionary;
+    }
+
+    public String highestValueWord(String word)
+    {
+        Bag<String> possibleWords = possibleWords(word);
+        String highestValueWord = highestValue(possibleWords);
+        return highestValueWord;
+    }
+
+    private Bag<String> possibleWords(String letters)
+    {
+        Bag<String> words = new Bag<>();
+        Bag<String> letterPermutations = permute("", letters, new Bag<>());
+        Iterator<String> it = letterPermutations.iterator();
+
+        Hashtable<String, String> wordsST = new Hashtable<>();
+        while(it.hasNext())
+        {
+            String w = it.next();
+            if ( dictionary.isWord(w) && !wordsST.containsKey(w))
+            {
+                words.add(w);
+                wordsST.put(w, w);
+            }
+        }
+
+        return words;
+    }
+
+    public int numberOfPermutations(String letters)
+    {
+        Bag<String> permutations = permute("", letters, new Bag<>());
+        Iterator<String> it = permutations.iterator();
+
+        int count = 0;
+        while(it.hasNext())
+        {
+            count++;
+            it.next();
+        }
+
+        return count;
+    }
+
+    private boolean ignoreDeadEndPermutations = true;
+
+    private Bag<String> permute(String soFar, String left, Bag<String> permutations)
+    {
+        if (left.length() < 1)
+        {
+            permutations.add(soFar);
+            return permutations;
+        }
+
+        for(int i = 0; i < left.length(); i++)
+        {
+            String next = soFar + left.charAt(i);
+            String remaining = left.substring(0, i) + left.substring(i + 1, left.length());
+            if (remaining.length() > 0 ) permutations.add(next);
+
+            if (ignoreDeadEndPermutations)
+            {
+                if (dictionary.numberOfSubWords(next) > 0)
+                {
+                    permutations = permute(next, remaining, permutations);
+                }
+            }
+            else permutations = permute(next, remaining, permutations);
+        }
+
+        return permutations;
+    }
+
+    private String highestValue(Bag<String> words)
+    {
+        Iterator<String> it = words.iterator();
+
+        int highestValue = 0;
+        String highestValueWord = "";
+        while (it.hasNext())
+        {
+            String nextWord = it.next();
+            int wordValue = WordValue.value(nextWord);
+            if ( wordValue > highestValue)
+            {
+                highestValue = wordValue;
+                highestValueWord = nextWord;
+            }
+        }
+
+        return highestValueWord;
+    }
+    """
