@@ -92,6 +92,7 @@ class ScrabbleGame:
                     hand_letters = ''.join(letter_list)
                     self.word_list.words = self.word_finder.possible_words(hand_letters)
 
+
 class Board:
     def __init__(self, surface, rect, rows, cols):
         self.surface = surface
